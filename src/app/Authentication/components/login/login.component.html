@@ -1,0 +1,30 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="loginForm.hasError('invalidCredentials')">
+        <span class="error-message">Invalid Email/Password</span>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input id="email" formControlName="email" type="email" />
+        <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+            <span *ngIf="loginForm.get('email')?.errors?.['required']" class="error-message">Email is required.</span>
+            <span *ngIf="loginForm.get('email')?.errors?.['email']" class="error-message">Invalid email format.</span>
+        </div>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input id="password" formControlName="password" type="password" />
+        <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)">
+            <span *ngIf="loginForm.get('password')?.errors?.['required']" class="error-message">Password is required.</span>
+        </div>
+    </div>
+    <div>
+        <label for="rememberMe">Remember Me:</label>
+        <input id="rememberMe" formControlName="rememberMe" type="checkbox" />
+    </div>
+    <button type="submit">Login</button>
+</form>
+
+<!-- Don't have an account section -->
+<div class="register-section">
+    <p>Don't have an account? <a [routerLink]="['/auth/register']">Register here</a></p>
+</div>

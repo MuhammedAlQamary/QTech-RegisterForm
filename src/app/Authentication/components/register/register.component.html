@@ -1,0 +1,153 @@
+<div *ngIf="registerForm.hasError('registrationFailed')" class="error-message">
+  <span>{{ registerForm.errors?.['registrationFailed'] }}</span>
+</div>
+
+<div class="register-background">
+  <div class="register-container">
+    <h2>تسجيل جديد</h2>
+    <p>قم بالتسجيل لتنتج بأداء أفضل</p>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <input
+          type="text"
+          formControlName="lastName"
+          placeholder="الاسم الأخير"
+          class="form-input"
+        />
+        @if(registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched) {
+          @if (registerForm.get('lastName')?.hasError("required")) {
+            <span class="error-message">الاسم الأخير مطلوب</span>
+          }
+        }
+        
+        <input
+          type="text"
+          formControlName="firstName"
+          placeholder="الاسم الأول"
+          class="form-input"
+        />
+        @if(registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched) {
+          @if (registerForm.get('firstName')?.hasError("required")) {
+            <span class="error-message">الاسم الأول مطلوب</span>
+          }
+        }
+      </div>
+      <div class="form-row">
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="البريد الإلكتروني"
+          class="form-input"
+        />
+        @if(registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+          @if (registerForm.get('email')?.hasError("required")) {
+            <span class="error-message">البريد الإلكتروني مطلوب</span>
+          }
+          @if (registerForm.get('email')?.hasError("email")) {
+            <span class="error-message">البريد الإلكتروني غير صحيح</span>
+          }
+        }
+        <input
+          type="text"
+          formControlName="mobile"
+          placeholder="رقم الجوال"
+          class="form-input"
+        />
+        @if(registerForm.get('mobile')?.invalid && registerForm.get('mobile')?.touched) {
+          @if (registerForm.get('mobile')?.hasError("required")) {
+            <span class="error-message">رقم الجوال مطلوب</span>
+          }
+          @if (registerForm.get('mobile')?.hasError("pattern")) {
+            <span class="error-message">رقم الجوال غير صحيح</span>
+          }
+        }
+        <!-- formControlName="countryCode"  -->
+        <select 
+          formControlName="countryCode"
+          class="form-input select-box">
+          <option value="" disabled selected>اختر</option>
+          <option value="+20">+20</option>
+          <option value="+966">+966</option>
+        </select>
+        <!-- validation-->
+        @if(registerForm.get('countryCode')?.invalid && registerForm.get('countryCode')?.touched) {
+          @if (registerForm.get('countryCode')?.hasError("required")) {
+            <span class="error-message">الرمز الدولي مطلوب</span>
+          }
+        }
+
+      </div>
+
+      <div class="form-row password-row">
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="كلمة المرور"
+          class="form-input"
+          [type]="showPassword ? 'text' : 'password'"
+        />
+        @if(registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+          @if (registerForm.get('password')?.hasError("required")) {
+            <span class="error-message">كلمة المرور مطلوبة</span>
+          }
+          @if (registerForm.get('password')?.hasError("minlength")) {
+            <span class="error-message">كلمة المرور يجب أن تكون 6 أحرف على الأقل</span>
+          }
+        }
+        <span class="icon" (click)="togglePasswordVisibility()">
+          <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </span>
+      </div>
+      
+      <div class="form-row password-row">
+        <input
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="تأكيد كلمة المرور"
+          class="form-input"
+          [type]="showConfirmPassword ? 'text' : 'password'"
+        />
+        <!-- @if(registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) {
+          @if (registerForm.get('confirmPassword')?.hasError("required")) {
+            <span class="error-message">تأكيد كلمة المرور مطلوب</span>
+          }
+          @if (registerForm.get('confirmPassword')?.hasError("mustMatch")) {
+            <span class="error-message">كلمة المرور غير متطابقة</span>
+          }
+        } -->
+        <span class="icon" (click)="toggleConfirmPasswordVisibility()">
+          <i [class]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </span>
+      </div>
+
+      <div class="form-row">
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="checkbox" formControlName="acceptTerms" value="true" />
+            أوافق على كافة <a href="#">الشروط والأحكام</a>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="otp-options">
+          <label class="otp-label">إرسال رمز التحقق من خلال</label>
+          <div class="checkbox-options">
+            <label>
+              <input type="checkbox" formControlName="verifyEmail" value="true"/>
+              البريد الإلكتروني
+            </label>
+            <label>
+              <input type="checkbox" value="true" formControlName="verifyPhone"/>
+              رقم الجوال
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-button">تسجيل</button>
+
+      <p class="login-link">لديك حساب؟ <a href="#">تسجيل الدخول</a></p>
+    </form>
+  </div>
+</div>

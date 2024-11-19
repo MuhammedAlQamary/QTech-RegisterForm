@@ -1,0 +1,129 @@
+<div class="profile-container">
+  <div class="profile-sidebar">
+    <!-- <div class="profile-picture">
+        <img *ngIf="profile.personalImage" [src]="profile.personalImage" alt="Profile Image" />
+        <div *ngIf="!profile.personalImage" class="placeholder-image"></div>
+        <button class="upload-button" (click)="onImageUpload()">تحديث صورة</button>
+      </div> -->
+    <div class="profile-navigation">
+      <button
+        (click)="selectTab('personalInfo')"
+        [class.active]="selectedTab === 'personalInfo'"
+      >
+        البيانات الشخصية
+      </button>
+      <button
+        (click)="selectTab('socialLinks')"
+        [class.active]="selectedTab === 'socialLinks'"
+      >
+        روابط التواصل الاجتماعي
+      </button>
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <!-- Personal Info Section -->
+      <div *ngIf="selectedTab === 'personalInfo'" class="tab-content">
+        <div class="personalInfo toggle">
+          <h2>البيانات الشخصية</h2>
+          <div class="form-group">
+            <label for="firstName">الاسم الأول</label>
+            <input id="firstName" formControlName="firstName" type="text" />
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">الاسم الأخير</label>
+            <input id="lastName" formControlName="lastName" type="text" />
+          </div>
+
+          <div class="form-group">
+            <label for="fullNameArabic">الاسم كامل بالعربية</label>
+            <input
+              id="fullNameArabic"
+              formControlName="fullNameArabic"
+              type="text"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="fullNameEnglish">الاسم كامل بالإنجليزية</label>
+            <input
+              id="fullNameEnglish"
+              formControlName="fullNameEnglish"
+              type="text"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="dateOfBirth">تاريخ الميلاد</label>
+            <input id="dateOfBirth" formControlName="dateOfBirth" type="date" />
+          </div>
+
+          <!-- Nationality -->
+           <div class="form-group">
+            <label for="nationality">الجنسية</label>
+            <input id="nationality" formControlName="nationality" type="text" />
+          </div>
+
+          <div class="form-group">
+            <label>النوع</label>
+            <div class="gender-options">
+              <label>
+                <input type="radio" formControlName="gender" [value]="0" /> ذكر
+              </label>
+              <label>
+                <input type="radio" formControlName="gender" [value]="1" /> أنثى
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="addressInfo toggle">
+          <h2>معلومات العنوان</h2>
+          <div class="form-group">
+            <label for="fullAddress"> العنوان كامل</label>
+            <input id="fullAddress" formControlName="fullAddress" type="text" />
+          </div>
+          <div class="form-group">
+            <label for="city">المدينة</label>
+            <input id="city" formControlName="city" type="text" />
+          </div>
+          <div class="form-group">
+            <label for="country">الدولة</label>
+            <input id="country" formControlName="country" type="text" />
+          </div>
+        </div>
+        <div class="about-me toggle">
+          <h2>نبذة عني</h2>
+          <textarea formControlName="aboutMe"></textarea>
+        </div>
+        <button type="submit" class="save-button">حفظ</button>
+      </div>
+    </form>
+
+      <!-- Social Links Section -->
+      <form [formGroup]="socialForm" (ngSubmit)="onSubmitSocialMediaLinks()">
+        <div *ngIf="selectedTab === 'socialLinks'" class="tab-content">
+          <h2>روابط التواصل الاجتماعي</h2>
+          @for (item of platformArray; track $index) {
+            <button type="button" (click)="addPlatform(item.name)">{{item.name}}</button>
+          }
+  
+          <div formArrayName="platforms">
+            <div *ngFor="let link of socialFormArray.controls; let i = index" [formGroupName]="i" class="form-group">
+              <img [src]="'/assets/images/' + getFormGroupImage(i)" />
+              <input type="hidden" formControlName="Platform" />
+              <label for="username-{{ i }}">اسم المستخدم</label>
+              <input id="username-{{ i }}" formControlName="Username" placeholder="اسم المستخدم" />
+              <label for="url-{{ i }}">الرابط</label>
+              <input id="url-{{ i }}" formControlName="Url" placeholder="رابط الحساب" />
+              <button type="button" (click)="removePlatform(i)">حذف</button>
+            </div>
+          </div>
+          <button type="submit" class="save-button">حفظ الروابط</button>
+        </div>
+      </form>
+
+    
+  </div>
+</div>

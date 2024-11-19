@@ -1,0 +1,76 @@
+:root {
+    --border-color: #ccc;
+    --background-color: #f9f9f9;
+    --label-color: #333;
+    --button-background-color: #007bff;
+    --button-hover-background-color: #0056b3;
+    --button-text-color: white;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--background-color);
+}
+
+div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: var(--label-color);
+}
+
+input[type="email"],
+input[type="password"],
+input[type="checkbox"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+}
+
+input[type="checkbox"] {
+    width: auto;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--button-background-color);
+    border: none;
+    border-radius: 3px;
+    color: var(--button-text-color);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--button-hover-background-color);
+}
+
+.register-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-section p {
+    margin: 0;
+    color: var(--label-color);
+}
+
+.register-section a {
+    color: var(--button-background-color);
+    text-decoration: none;
+}
+
+.register-section a:hover {
+    text-decoration: underline;
+}
