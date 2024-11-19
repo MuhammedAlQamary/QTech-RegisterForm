@@ -1,9 +1,0 @@
-{
-  "routes": [
-    "/auth",
-    "/auth/login",
-    "/auth/otp",
-    "/auth/profile",
-    "/auth/register"
-  ]
-}
