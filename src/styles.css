@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Ensures the body takes the full viewport height */
+  }
+  
+  /* Set up the background image */
+  body {
+    background-image: url("/src/app/assets/registerBackground.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+  }
